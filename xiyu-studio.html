@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xiyu Studio — Clarity for Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#181a1e;
+    --muted:#6b7280;
+    --muted-2:#9aa2ac;
+    --line: rgba(20,20,25,0.10);
+    --pill-bg: rgba(20,20,25,0.055);
+    --mint:#3fe0c5;
+    --blue:#5b8af7;
+    --violet:#9b6bf0;
+    --pink:#ef5da8;
+    --coral:#ff6f5e;
+    --sans:'Quicksand', sans-serif;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+  body{
+    margin:0; background:#fff; color:var(--ink);
+    font-family:var(--sans); font-weight:500; font-size:16px; line-height:1.65;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden; position:relative;
+  }
+  a{ color:inherit; }
+  ::selection{ background:#dff4ee; color:var(--ink); }
+  :focus-visible{ outline: 2px solid var(--blue); outline-offset:3px; }
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 32px; position:relative; z-index:2; }
+  .blob{ position:absolute; border-radius:50%; filter:blur(90px); pointer-events:none; z-index:0; }
+
+  /* ---------- nav ---------- */
+  header{ position:sticky; top:0; z-index:80; padding:22px 0; }
+  .nav{ display:flex; align-items:center; justify-content:space-between; max-width:var(--maxw); margin:0 auto; padding:0 32px; }
+  .logo-mark{ width:30px; height:30px; }
+  .navdots{ display:flex; gap:10px; }
+  .navdot{
+    width:34px; height:34px; border-radius:50%; border:1.5px solid var(--line);
+    background:rgba(255,255,255,0.6); backdrop-filter:blur(6px); cursor:pointer;
+    transition:border-color .25s ease, background .25s ease, transform .2s ease;
+  }
+  .navdot:hover{ transform:translateY(-1px); }
+  .navdot.is-active{ background:var(--ink); border-color:var(--ink); }
+  .logo-word{ font-weight:700; font-size:20px; letter-spacing:-0.01em; text-decoration:none; }
+
+  /* ---------- pill highlight helper ---------- */
+  .pill{ background:var(--pill-bg); border-radius:999px; padding:2px 16px; display:inline-block; }
+
+  /* ---------- section shells ---------- */
+  section{ position:relative; padding:70px 0; }
+  .center{ text-align:center; }
+
+  /* ---------- hero ---------- */
+  .hero{ padding-top:60px; padding-bottom:20px; }
+  .hero h1{
+    font-weight:600; font-size:clamp(26px,3.6vw,38px); line-height:1.55;
+    margin:0 auto; max-width:20ch;
+  }
+  .hero-copy{
+    max-width:46ch; margin:46px auto 0; color:var(--muted); font-size:15px; text-align:center;
+  }
+  .hero-copy p{ margin:0 0 14px; }
+  .hero-brand{ display:flex; flex-direction:column; align-items:center; gap:6px; margin-top:44px; }
+  .hero-brand svg{ width:26px; height:26px; }
+  .hero-brand span{ font-size:13px; font-weight:600; color:var(--ink); }
+
+  /* ---------- connector svgs ---------- */
+  .connector{ position:relative; width:100%; z-index:1; pointer-events:none; }
+  .connector svg{ display:block; width:100%; height:100%; overflow:visible; }
+
+  /* ---------- work / portfolio ---------- */
+  .work-grid{ display:grid; grid-template-columns: 0.9fr 1.1fr; gap:50px; align-items:start; position:relative; z-index:2; }
+  .stack{ position:relative; height:340px; }
+  .stack-card{
+    position:absolute; top:0; left:0; width:100%; height:280px; border-radius:20px;
+    overflow:hidden; box-shadow:0 25px 50px -25px rgba(20,20,30,0.35);
+    transition:transform .5s cubic-bezier(.2,.8,.2,1), opacity .4s ease, box-shadow .4s ease;
+    display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;
+  }
+  .proj-list{ display:grid; gap:0; }
+  .proj-row{
+    display:flex; align-items:center; gap:18px; padding:20px 0; cursor:pointer;
+    border-bottom:1px solid var(--line);
+  }
+  .proj-row:first-child{ border-top:1px solid var(--line); }
+  .proj-dot{ width:9px; height:9px; border-radius:50%; background:var(--line); flex-shrink:0; transition:background .3s ease, transform .3s ease; }
+  .proj-row.is-active .proj-dot{ background:linear-gradient(120deg,var(--pink),var(--violet)); transform:scale(1.3); }
+  .proj-card{
+    flex:1; background:rgba(20,20,25,0.03); border:1px solid var(--line); border-radius:16px;
+    padding:16px 20px; transition:background .3s ease, border-color .3s ease;
+  }
+  .proj-row.is-active .proj-card{ background:rgba(239,93,168,0.06); border-color:rgba(239,93,168,0.25); }
+  .proj-card .pname{ font-weight:700; font-size:15.5px; }
+  .proj-card .pclient{ font-size:13px; color:var(--muted); margin-top:2px; }
+  .proj-card .pdate{ font-size:12px; color:var(--muted-2); text-align:right; margin-top:8px; }
+  .viewmore-row{ margin-top:26px; }
+
+  .btn-outline{
+    font-family:var(--sans); font-weight:700; font-size:14px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px; padding:11px 22px; border-radius:999px;
+    border:1.5px solid var(--line); color:var(--ink); background:#fff; cursor:pointer;
+    transition:border-color .2s ease, transform .15s ease;
+  }
+  .btn-outline:hover{ border-color:var(--ink); transform:translateY(-1px); }
+
+  /* ---------- transition line text ---------- */
+  .knot-line{ text-align:center; color:var(--muted); font-size:15px; margin:0; position:relative; z-index:2; }
+
+  /* ---------- services ---------- */
+  .services-wrap{ position:relative; z-index:2; max-width:760px; margin:0 auto; }
+  .service-list{ display:grid; gap:14px; }
+  .service-pill{
+    background:rgba(20,20,25,0.04); border:1px solid var(--line); border-radius:20px;
+    padding:22px 28px; cursor:pointer; transition:background .25s ease, transform .2s ease;
+    font-weight:700; font-size:18px;
+  }
+  .service-pill:hover{ background:rgba(20,20,25,0.07); transform:translateX(2px); }
+  .services-more{ text-align:center; margin-top:22px; }
+  .services-more a{ color:var(--muted); font-weight:700; font-size:14px; text-decoration:none; }
+  .services-more a:hover{ color:var(--ink); }
+
+  .service-detail{
+    display:none; background:rgba(20,20,25,0.035); border:1px solid var(--line); border-radius:24px;
+    padding:40px; cursor:default; position:relative;
+  }
+  .service-detail.is-open{ display:grid; grid-template-columns: 0.9fr 1.1fr; gap:40px; }
+  .service-list.is-hidden{ display:none; }
+  .services-more.is-hidden{ display:none; }
+  .sd-quotes p.label{ font-weight:700; font-size:13px; color:var(--muted); margin:0 0 14px; }
+  .sd-bubble{
+    display:block; background:#fff; border:1px solid var(--line); border-radius:14px;
+    padding:10px 14px; font-size:13.5px; color:var(--muted); margin-bottom:8px; font-weight:600;
+  }
+  .sd-blurb{ margin-top:18px; font-size:14.5px; color:var(--muted); font-weight:500; }
+  .sd-title{ font-weight:700; font-size:clamp(24px,3vw,32px); margin:0 0 18px; }
+  .sd-deliver p.label{ font-weight:700; font-size:13px; color:var(--muted); margin:0 0 14px; }
+  .sd-deliver ul{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+  .sd-deliver li{ font-weight:600; font-size:14.5px; position:relative; padding-left:18px; }
+  .sd-deliver li::before{ content:""; position:absolute; left:0; top:8px; width:6px; height:6px; border-radius:50%; background:linear-gradient(120deg,var(--mint),var(--blue)); }
+  .sd-note{ margin-top:14px; font-size:12px; color:var(--muted-2); font-weight:600; }
+  .sd-back{
+    grid-column:1/-1; text-align:left; font-size:12.5px; color:var(--muted-2); font-weight:600;
+    margin-top:6px; padding-top:16px; border-top:1px solid var(--line);
+  }
+
+  /* ---------- formula ---------- */
+  .formula-grid{ display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; position:relative; z-index:2; }
+  .formula-grid h2{ font-weight:700; font-size:clamp(22px,2.6vw,28px); margin:0 0 10px; }
+  .formula-grid .sub{ font-size:14px; color:var(--muted); margin:0; }
+  .equation{ font-weight:700; font-size:clamp(20px,2.8vw,30px); text-align:right; line-height:1.5; }
+  .equation .gtext{ background:linear-gradient(120deg,var(--mint),var(--blue) 45%,var(--violet) 75%,var(--pink)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+
+  /* ---------- contact / diagnose ---------- */
+  .contact-grid{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:50px; align-items:start; position:relative; z-index:2; }
+  .contact-grid h2{ font-weight:700; font-size:clamp(24px,3vw,32px); margin:0 0 10px; }
+  .contact-grid .sub{ color:var(--muted); font-size:14.5px; margin:0; }
+  .diagnose-card{
+    background:rgba(20,20,25,0.035); border:1px solid var(--line); border-radius:24px; padding:34px;
+  }
+  .q-row{ margin-bottom:20px; }
+  .q-row label{ display:block; font-size:13.5px; font-weight:600; color:var(--muted); margin-bottom:8px; }
+  .q-row select, .q-row input{
+    width:100%; font-family:var(--sans); font-weight:600; font-size:14.5px; color:var(--ink);
+    padding:13px 16px; border-radius:12px; border:1px solid var(--line); background:#fff; appearance:none;
+  }
+  .q-row select{
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9'><path d='M1 1l6 6 6-6' stroke='%236b7280' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat:no-repeat; background-position:right 16px center;
+  }
+  .q-pair{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .diagnose-submit{ display:flex; justify-content:flex-end; margin-top:8px; }
+  .diagnose-submit button{
+    font-family:var(--sans); font-weight:700; font-size:14.5px; padding:13px 26px; border-radius:999px;
+    border:1.5px solid var(--ink); background:var(--ink); color:#fff; cursor:pointer; transition:opacity .2s ease, transform .15s ease;
+  }
+  .diagnose-submit button:hover{ opacity:0.85; transform:translateY(-1px); }
+  .diagnose-result{
+    display:none; margin-top:22px; padding-top:22px; border-top:1px solid var(--line);
+  }
+  .diagnose-result.is-visible{ display:block; }
+  .diagnose-result p{ margin:0 0 12px; font-size:14.5px; color:var(--muted); font-weight:500; }
+  .diagnose-result .rec{ font-weight:700; font-size:17px; color:var(--ink); }
+  .diagnose-result a.btn-outline{ margin-top:12px; }
+
+  /* ---------- footer ---------- */
+  footer{ position:relative; padding-top:60px; z-index:2; }
+  .footer-cols{ display:flex; gap:120px; flex-wrap:wrap; margin-bottom:60px; }
+  .footer-col h4{ font-size:13px; font-weight:700; color:var(--muted-2); text-transform:uppercase; letter-spacing:0.04em; margin:0 0 16px; }
+  .footer-col a, .footer-col p{ display:block; font-size:14.5px; color:var(--muted); text-decoration:none; margin-bottom:8px; font-weight:600; }
+  .footer-col a:hover{ color:var(--ink); }
+  .footer-mark{ margin:20px 0; }
+  .footer-mark svg{ width:100%; max-width:280px; height:auto; display:block; }
+  .footer-word{ font-weight:700; font-size:38px; padding-bottom:40px; }
+
+  .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.is-visible{ opacity:1; transform:none; }
+
+  @media (max-width: 880px){
+    .work-grid, .contact-grid, .formula-grid{ grid-template-columns:1fr; gap:28px; }
+    .equation{ text-align:left; }
+    .service-detail.is-open{ grid-template-columns:1fr; }
+    .q-pair{ grid-template-columns:1fr; }
+    .footer-cols{ gap:50px; }
+  }
+  @media (max-width:600px){
+    .wrap{ padding:0 20px; }
+    .nav{ padding:0 20px; }
+    .navdots{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- background mesh -->
+<div class="blob" style="width:620px;height:620px; top:20px; left:-220px; background:radial-gradient(circle, rgba(239,93,168,0.28), transparent 70%);"></div>
+<div class="blob" style="width:700px;height:700px; top:120px; right:-260px; background:radial-gradient(circle, rgba(63,224,197,0.30), transparent 70%);"></div>
+<div class="blob" style="width:520px;height:520px; top:1450px; right:-200px; background:radial-gradient(circle, rgba(63,224,197,0.22), transparent 70%);"></div>
+<div class="blob" style="width:480px;height:480px; top:2400px; left:-180px; background:radial-gradient(circle, rgba(155,107,240,0.16), transparent 70%);"></div>
+<div class="blob" style="width:560px;height:560px; top:3300px; left:-200px; background:radial-gradient(circle, rgba(63,224,197,0.24), transparent 70%);"></div>
+<div class="blob" style="width:520px;height:520px; top:4150px; right:-200px; background:radial-gradient(circle, rgba(239,93,168,0.18), transparent 70%);"></div>
+<div class="blob" style="width:600px;height:600px; top:4900px; left:-220px; background:radial-gradient(circle, rgba(63,224,197,0.22), transparent 70%);"></div>
+
+<header>
+  <div class="nav">
+    <svg class="logo-mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="lg1" x1="6" y1="46" x2="36" y2="12"><stop stop-color="#3fe0c5"/><stop offset="1" stop-color="#5b8af7"/></linearGradient>
+        <linearGradient id="lg2" x1="58" y1="46" x2="28" y2="12"><stop stop-color="#5b8af7"/><stop offset="1" stop-color="#9b6bf0"/></linearGradient>
+      </defs>
+      <path d="M14,46 C6,36 8,18 24,14 C36,11 42,20 37,28 C33,34 24,33 23,25" stroke="url(#lg1)" stroke-width="7" stroke-linecap="round" fill="none"/>
+      <path d="M50,46 C58,36 56,18 40,14 C28,11 22,20 27,28 C31,34 40,33 41,25" stroke="url(#lg2)" stroke-width="7" stroke-linecap="round" fill="none"/>
+      <rect x="4" y="46" width="38" height="8" rx="4" fill="#ff6f5e"/>
+      <circle cx="49" cy="50" r="6" fill="#ff6f5e"/>
+    </svg>
+    <div class="navdots" id="navdots">
+      <div class="navdot" data-target="hero"></div>
+      <div class="navdot" data-target="work"></div>
+      <div class="navdot" data-target="services"></div>
+      <div class="navdot" data-target="formula"></div>
+      <div class="navdot" data-target="contact"></div>
+    </div>
+    <a href="#hero" class="logo-word">Xiyu.Studio</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="wrap center">
+      <h1><span class="pill">In health</span><br>clarity <span class="pill">isn't a luxury</span><br>it's a <span class="pill">responsibility</span></h1>
+      <div class="hero-copy">
+        <p>We believe design should cut through noise, refine complexity, and deliver meaning with precision.</p>
+        <p>That belief shapes how we work. We translate intricate systems into understanding that feels simple, human, and true, where our role is to create connection.</p>
+      </div>
+      <div class="hero-brand">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14,46 C6,36 8,18 24,14 C36,11 42,20 37,28 C33,34 24,33 23,25" stroke="url(#lg1)" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <path d="M50,46 C58,36 56,18 40,14 C28,11 22,20 27,28 C31,34 40,33 41,25" stroke="url(#lg2)" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <rect x="4" y="46" width="38" height="8" rx="4" fill="#ff6f5e"/>
+          <circle cx="49" cy="50" r="6" fill="#ff6f5e"/>
+        </svg>
+        <span>Xiyu.Studio</span>
+      </div>
+    </div>
+    <div class="connector" style="height:120px;">
+      <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMin meet">
+        <path class="spine-path" d="M100,0 C100,30 70,20 75,40 C79,56 105,52 100,70 C97,82 100,95 100,120" stroke="#ef5da8" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="connector" style="height:60px; margin-bottom:-10px;">
+      <svg viewBox="0 0 200 60" preserveAspectRatio="xMidYMin meet"><path class="spine-path" d="M100,0 L100,60" stroke="#ef5da8" stroke-width="2.4" fill="none"/></svg>
+    </div>
+    <div class="wrap work-grid reveal">
+      <div class="stack" id="stackWrap">
+        <div class="stack-card" data-proj="exosome" style="background:linear-gradient(135deg,#2c2c34,#54566b); transform:translateY(0) rotate(-3deg); z-index:1;">Exosome Narative</div>
+        <div class="stack-card" data-proj="colorful" style="background:conic-gradient(from 200deg, #ff6f5e, #f7c94c, #3fe0c5, #5b8af7, #9b6bf0, #ef5da8); transform:translateY(18px) rotate(2deg); z-index:2;">Colorful Works</div>
+        <div class="stack-card" data-proj="cair" style="background:linear-gradient(135deg,#1c2b3a,#3d5a73); transform:translateY(36px) rotate(-1deg); z-index:1;">Center of AI Research</div>
+      </div>
+      <div>
+        <div class="proj-list" id="projList">
+          <div class="proj-row" data-proj="exosome">
+            <span class="proj-dot"></span>
+            <div class="proj-card">
+              <div class="pname">Exosome Narative</div>
+              <div class="pclient">Dermama</div>
+              <div class="pdate">December 2025</div>
+            </div>
+          </div>
+          <div class="proj-row" data-proj="colorful">
+            <span class="proj-dot"></span>
+            <div class="proj-card">
+              <div class="pname">Colorful Works</div>
+              <div class="pclient">Reza Biotech</div>
+              <div class="pdate">August 2026</div>
+            </div>
+          </div>
+          <div class="proj-row" data-proj="cair">
+            <span class="proj-dot"></span>
+            <div class="proj-card">
+              <div class="pname">Center of AI Research</div>
+              <div class="pclient">Atmajaya</div>
+              <div class="pdate">July 2026</div>
+            </div>
+          </div>
+        </div>
+        <div class="viewmore-row"><a href="#" class="btn-outline">View More →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSITION -->
+  <section style="padding:50px 0;">
+    <div class="connector" style="height:60px;">
+      <svg viewBox="0 0 200 60" preserveAspectRatio="xMidYMin meet"><path class="spine-path" d="M100,0 L100,60" stroke="#8f6fe0" stroke-width="2.4" fill="none"/></svg>
+    </div>
+    <p class="knot-line reveal">We help build the knot between<br>you and them through our service</p>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="connector" style="height:80px;">
+      <svg viewBox="0 0 200 80" preserveAspectRatio="xMidYMin meet"><path class="spine-path" d="M100,0 C100,25 130,20 125,45 C121,66 100,60 100,80" stroke="#8f6fe0" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+    </div>
+    <div class="wrap services-wrap reveal">
+
+      <div class="service-list" id="serviceList">
+        <div class="service-pill" data-service="narrative">Narrative Builder</div>
+        <div class="service-pill" data-service="brand">Brand Identity Builder</div>
+        <div class="service-pill" data-service="explainer">Explainer Builder</div>
+        <div class="service-pill" data-service="monthly">Monthly Content Builder</div>
+      </div>
+      <div class="services-more" id="servicesMore"><a href="#" id="moreServicesLink">More about our services →</a></div>
+
+      <!-- detail panels -->
+      <div class="service-detail" id="detail-narrative">
+        <div class="sd-quotes">
+          <p class="label">If you've ever said:</p>
+          <span class="sd-bubble">"People don't get what we do."</span>
+          <span class="sd-bubble">"Doctors understand it, but patients don't."</span>
+          <span class="sd-bubble">"Our USP statement isn't sharp enough."</span>
+          <p class="sd-blurb">We take the information you already have and turn it into communication people actually understand.</p>
+        </div>
+        <div class="sd-deliver">
+          <h3 class="sd-title">Narrative Builder</h3>
+          <p class="label">What you'll walk away with:</p>
+          <ul>
+            <li>A refined narrative text that tells your story clearly</li>
+            <li>A messaging guide your team can use consistently</li>
+            <li>A competitor differentiation summary that shows exactly where you stand</li>
+            <li>A visual system diagram that simplifies your process</li>
+            <li>A precise, memorable USP statement</li>
+          </ul>
+        </div>
+        <div class="sd-back">Click Anywhere to go back</div>
+      </div>
+
+      <div class="service-detail" id="detail-brand">
+        <div class="sd-quotes">
+          <p class="label">If you've ever said:</p>
+          <span class="sd-bubble">"We look generic, like every other clinic."</span>
+          <span class="sd-bubble">"People don't trust us yet."</span>
+          <span class="sd-bubble">"Our branding isn't consistent."</span>
+          <p class="sd-blurb">We take who you are and shape it into a brand identity that feels clear, credible, and consistent across every touchpoint.</p>
+        </div>
+        <div class="sd-deliver">
+          <h3 class="sd-title">Brand Identity Builder</h3>
+          <p class="label">What you'll walk away with:</p>
+          <ul>
+            <li>Complete brand guidelines for visual and verbal identity</li>
+            <li>Clinic brochures designed for clarity and trust</li>
+            <li>A messaging guide your entire team can follow</li>
+            <li>Social media templates ready for daily use</li>
+          </ul>
+        </div>
+        <div class="sd-back">Click Anywhere to go back</div>
+      </div>
+
+      <div class="service-detail" id="detail-explainer">
+        <div class="sd-quotes">
+          <p class="label">If you've ever said:</p>
+          <span class="sd-bubble">"It takes too long to get people to understand our product."</span>
+          <span class="sd-bubble">"We're preparing a launch campaign."</span>
+          <span class="sd-bubble">"We need strong educational content."</span>
+          <p class="sd-blurb">We take your technical knowledge and translate it into clear, visual stories that work across audiences — patients, doctors, partners, or investors.</p>
+        </div>
+        <div class="sd-deliver">
+          <h3 class="sd-title">Explainer Builder</h3>
+          <p class="label">What you'll walk away with:</p>
+          <ul>
+            <li>30–90 second explainer video(s)</li>
+            <li>Motion graphics &amp; 3D visual assets</li>
+            <li>A social media campaign pack for launch</li>
+            <li>A product launch deck that persuades and informs</li>
+          </ul>
+        </div>
+        <div class="sd-back">Click Anywhere to go back</div>
+      </div>
+
+      <div class="service-detail" id="detail-monthly">
+        <div class="sd-quotes">
+          <p class="label">If you've ever said:</p>
+          <span class="sd-bubble">"We need consistent output every month."</span>
+          <span class="sd-bubble">"We don't have an internal design team."</span>
+          <span class="sd-bubble">"We always need patient education visuals."</span>
+          <p class="sd-blurb">We take the information you already have and turn it into communication people actually understand.</p>
+        </div>
+        <div class="sd-deliver">
+          <h3 class="sd-title">Monthly Content Builder</h3>
+          <p class="label">What you'll walk away with:</p>
+          <ul>
+            <li>A refined narrative text that tells your story clearly</li>
+            <li>A messaging guide your team can use consistently</li>
+            <li>A competitor differentiation summary that shows exactly where you stand</li>
+            <li>A visual system diagram that simplifies your process</li>
+            <li>A precise, memorable USP statement</li>
+          </ul>
+          <p class="sd-note">Note: we don't work with KOLs or influencers, but we do accept video editing based on your supplied materials.</p>
+        </div>
+        <div class="sd-back">Click Anywhere to go back</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FORMULA -->
+  <section id="formula">
+    <div class="connector" style="height:100px;">
+      <svg viewBox="0 0 200 100" preserveAspectRatio="xMidYMin meet"><path class="spine-path" d="M100,0 C100,30 90,40 100,60 C108,76 96,86 100,100" stroke="#5b8af7" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+    </div>
+    <div class="wrap formula-grid reveal">
+      <div>
+        <h2>Our formula to work with<br>healthcare industry</h2>
+        <p class="sub">Clarity saves lives.<br>Confusion costs trust.</p>
+      </div>
+      <div class="equation">Complexity − Noise +<br>Precision = <span class="gtext">Clarity</span></div>
+    </div>
+    <div class="connector" style="height:180px;">
+      <svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMin meet">
+        <path class="spine-path" d="M0,10 C60,120 160,150 220,80 C260,34 200,-4 165,34 C138,64 175,110 230,100 C300,86 340,120 400,150"
+          stroke="#3fe0c5" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- CONTACT / DIAGNOSE -->
+  <section id="contact">
+    <div class="wrap contact-grid reveal">
+      <div>
+        <h2>Not sure which service<br>fits your needs?</h2>
+        <p class="sub">Diagnose your pain points</p>
+      </div>
+      <div class="diagnose-card">
+        <form id="diagnoseForm">
+          <div class="q-row">
+            <label>What best describes where you're stuck?</label>
+            <select id="q1" required>
+              <option value="" disabled selected>Select an answer</option>
+              <option value="narrative">We can't explain what we do simply</option>
+              <option value="brand">Our brand doesn't feel credible yet</option>
+              <option value="explainer">We're launching something and need people to get it fast</option>
+              <option value="monthly">We need a steady stream of content</option>
+            </select>
+          </div>
+          <div class="q-row">
+            <label>What best describes your organization?</label>
+            <select required>
+              <option value="" disabled selected>Select an answer</option>
+              <option>Hospital or clinic</option>
+              <option>Health-tech company</option>
+              <option>Pharmaceutical or biotech</option>
+              <option>Research institution or lab</option>
+            </select>
+          </div>
+          <div class="q-row">
+            <label>How soon do you need this?</label>
+            <select required>
+              <option value="" disabled selected>Select an answer</option>
+              <option>Within a month</option>
+              <option>1–3 months</option>
+              <option>3–6 months</option>
+              <option>Just exploring</option>
+            </select>
+          </div>
+          <div class="q-row">
+            <label>What's your rough budget range?</label>
+            <select required>
+              <option value="" disabled selected>Select an answer</option>
+              <option>Under $2,000</option>
+              <option>$2,000 – $5,000</option>
+              <option>$5,000 – $15,000</option>
+              <option>Let's discuss</option>
+            </select>
+          </div>
+          <div class="q-row q-pair">
+            <div><label>Your name</label><input type="text" required></div>
+            <div><label>Company e-mail</label><input type="email" required></div>
+          </div>
+          <div class="diagnose-submit"><button type="submit">Get your diagnose →</button></div>
+        </form>
+        <div class="diagnose-result" id="diagnoseResult">
+          <p>Based on your answers, we'd recommend:</p>
+          <div class="rec" id="recName">—</div>
+          <a href="#services" class="btn-outline" id="recLink">See this service →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="connector" style="height:60px;">
+    <svg viewBox="0 0 200 60" preserveAspectRatio="xMidYMin meet"><path d="M100,0 L100,60" stroke="#ef5da8" stroke-width="2.4" fill="none"/></svg>
+  </div>
+  <div class="wrap">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Social Media</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Twitter</a>
+        <a href="#">Behance</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contacts</h4>
+        <p>Bintaro, South Tangerang,<br>Indonesia</p>
+        <a href="mailto:hello@xiyu.studio">hello@xiyu.studio</a>
+      </div>
+      <div class="footer-col">
+        <h4>Information</h4>
+        <a href="#work">Projects</a>
+        <a href="#services">Services</a>
+        <a href="#">About Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>&nbsp;</h4>
+        <a href="mailto:hello@xiyu.studio?subject=30%20minute%20call">Book a 30 minutes call</a>
+      </div>
+    </div>
+    <div class="footer-mark">
+      <svg viewBox="0 0 300 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="fg1" x1="20" y1="140" x2="120" y2="20"><stop stop-color="#3fe0c5"/><stop offset="1" stop-color="#5b8af7"/></linearGradient>
+          <linearGradient id="fg2" x1="220" y1="140" x2="140" y2="20"><stop stop-color="#5b8af7"/><stop offset="1" stop-color="#9b6bf0"/></linearGradient>
+        </defs>
+        <path d="M40,130 C10,100 20,40 70,28 C110,18 140,45 120,70 C105,88 75,85 72,62" stroke="url(#fg1)" stroke-width="16" stroke-linecap="round" fill="none"/>
+        <path d="M220,130 C250,100 240,40 190,28 C150,18 120,45 140,70 C155,88 185,85 188,62" stroke="url(#fg2)" stroke-width="16" stroke-linecap="round" fill="none"/>
+        <rect x="8" y="130" width="180" height="18" rx="9" fill="#ff6f5e"/>
+        <circle cx="212" cy="139" r="13" fill="#ff6f5e"/>
+      </svg>
+    </div>
+    <div class="footer-word">Xiyu.Studio</div>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target);} });
+  }, {threshold:0.12});
+  revealEls.forEach(el=>io.observe(el));
+
+  // Nav dots: click to scroll + scroll-spy
+  const navdots = document.querySelectorAll('.navdot');
+  navdots.forEach(dot=>{
+    dot.addEventListener('click', ()=>{
+      const id = dot.getAttribute('data-target');
+      document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+    });
+  });
+  const sectionIds = ['hero','work','services','formula','contact'];
+  const spyIo = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const idx = sectionIds.indexOf(e.target.id);
+        navdots.forEach((d,i)=> d.classList.toggle('is-active', i===idx));
+      }
+    });
+  }, {threshold:0.5});
+  sectionIds.forEach(id=>{ const el=document.getElementById(id); if(el) spyIo.observe(el); });
+
+  // Portfolio interactive preview
+  const projRows = document.querySelectorAll('.proj-row');
+  const stackCards = document.querySelectorAll('.stack-card');
+  function setActiveProject(key){
+    projRows.forEach(r=> r.classList.toggle('is-active', r.dataset.proj===key));
+    stackCards.forEach(c=>{
+      if(c.dataset.proj===key){
+        c.style.transform = 'translateY(0) rotate(0deg) scale(1.02)';
+        c.style.zIndex = 5;
+        c.style.opacity = 1;
+      } else {
+        c.style.transform = 'translateY(40px) rotate(-2deg) scale(0.94)';
+        c.style.zIndex = 1;
+        c.style.opacity = 0.35;
+      }
+    });
+  }
+  projRows.forEach(row=>{
+    row.addEventListener('mouseenter', ()=> setActiveProject(row.dataset.proj));
+    row.addEventListener('click', ()=> setActiveProject(row.dataset.proj));
+  });
+
+  // Services accordion behavior
+  const serviceList = document.getElementById('serviceList');
+  const servicesMore = document.getElementById('servicesMore');
+  const servicePills = document.querySelectorAll('.service-pill');
+  const detailPanels = document.querySelectorAll('.service-detail');
+
+  function openService(key){
+    serviceList.classList.add('is-hidden');
+    servicesMore.classList.add('is-hidden');
+    detailPanels.forEach(p=> p.classList.toggle('is-open', p.id === 'detail-'+key));
+  }
+  function closeServices(){
+    serviceList.classList.remove('is-hidden');
+    servicesMore.classList.remove('is-hidden');
+    detailPanels.forEach(p=> p.classList.remove('is-open'));
+  }
+  servicePills.forEach(pill=>{
+    pill.addEventListener('click', (ev)=>{ ev.stopPropagation(); openService(pill.dataset.service); });
+  });
+  detailPanels.forEach(panel=>{
+    panel.addEventListener('click', ()=> closeServices());
+  });
+  document.getElementById('moreServicesLink').addEventListener('click', (ev)=>{ ev.preventDefault(); });
+
+  // Diagnose quiz -> recommendation
+  const serviceNames = {
+    narrative: 'Narrative Builder',
+    brand: 'Brand Identity Builder',
+    explainer: 'Explainer Builder',
+    monthly: 'Monthly Content Builder'
+  };
+  const diagnoseForm = document.getElementById('diagnoseForm');
+  const diagnoseResult = document.getElementById('diagnoseResult');
+  const recName = document.getElementById('recName');
+  const recLink = document.getElementById('recLink');
+  diagnoseForm.addEventListener('submit', (ev)=>{
+    ev.preventDefault();
+    const key = document.getElementById('q1').value;
+    recName.textContent = serviceNames[key] || 'Narrative Builder';
+    recLink.onclick = (e)=>{
+      e.preventDefault();
+      document.getElementById('services').scrollIntoView({behavior:'smooth'});
+      setTimeout(()=> openService(key || 'narrative'), 500);
+    };
+    diagnoseResult.classList.add('is-visible');
+    diagnoseResult.scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+</script>
+
+</body>
+</html>
