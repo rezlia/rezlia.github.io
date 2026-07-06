@@ -3,254 +3,333 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plainspoken — a phrasebook for doctor-speak</title>
+<title>Xiyu Studio — Clarity for Health</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="site-header">
-  <div class="wrap header-row">
-    <div class="mark">
-      <span class="mark-glyph">☞</span>
-      <span class="mark-text">Plainspoken</span>
+<!-- background gradient SVG -->
+<div style="position: absolute; top: 0; left: 0; width: 100%; height: 120vh; z-index: -1; opacity: 0.4; pointer-events: none;">
+  <svg width="100%" height="100%" viewBox="0 0 1080 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <image href="bg-gradient.svg" width="1080" height="1080" preserveAspectRatio="none"/>
+  </svg>
+</div>
+
+<header>
+  <div class="nav">
+    <img src="Frame_15_image0_695_36.png" alt="Xiyu" class="logo-mark">
+    <div class="navdots" id="navdots">
+      <div class="navdot" data-target="hero"></div>
+      <div class="navdot" data-target="work"></div>
+      <div class="navdot" data-target="services"></div>
+      <div class="navdot" data-target="formula"></div>
+      <div class="navdot" data-target="contact"></div>
     </div>
-    <p class="tagline">a phrasebook for doctor&#8209;speak</p>
+    <a href="#hero" class="logo-word">Xiyu.Studio</a>
   </div>
 </header>
 
 <main>
 
-  <!-- HERO / LIVE TRANSLATOR -->
-  <section class="hero wrap">
-    <h1>Your doctor said a lot of words.<br>Here's what they meant.</h1>
-    <p class="hero-sub">Type any medical term below — the kind you'd hear in an appointment, a lab report, or a discharge note — and get the plain-English version, no medical degree required.</p>
-
-    <form class="translator" id="translator-form" autocomplete="off">
-      <label for="term-input" class="visually-hidden">Look up a medical term</label>
-      <input type="text" id="term-input" name="term" list="term-list" placeholder="Try “hypertension” or “biopsy”…">
-      <datalist id="term-list"></datalist>
-      <button type="submit">Translate</button>
-    </form>
-
-    <div class="translation-result" id="translation-result" hidden>
-      <div class="result-card">
-        <span class="result-tag" id="result-category">—</span>
-        <h2 id="result-term">—</h2>
-        <p class="result-plain" id="result-plain">—</p>
-        <p class="result-sentence" id="result-sentence">—</p>
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="wrap center">
+      <h1><span class="pill">In health</span><br>clarity <span class="pill">isn't a luxury</span><br>it's a <span class="pill">responsibility</span></h1>
+      <div class="hero-copy">
+        <p>We believe design should cut through noise, refine complexity, and deliver meaning with precision.</p>
+        <p>That belief shapes how we work. We translate intricate systems into understanding that feels simple, human, and true, where our role is to create connection.</p>
+      </div>
+      <div class="hero-brand">
+        <img src="Frame_15_image0_695_36.png" alt="Xiyu">
+        <span>Xiyu.Studio</span>
       </div>
     </div>
-
-    <p class="hero-hint" id="hero-hint">No match yet — try one of the fifteen terms in the index below, or browse by category.</p>
+    <div class="connector" style="height:120px;">
+      <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMin meet">
+        <path class="spine-path" d="M100,0 C100,30 70,20 75,40 C79,56 105,52 100,70 C97,82 100,95 100,120" stroke="#ef5da8" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
   </section>
 
-  <!-- INDEX CARD BROWSER -->
-  <section class="browser wrap" id="browse">
-    <div class="section-head">
-      <h2>The index</h2>
-      <p>Flip a card to see the plain-English side. Filter by the kind of appointment you're in.</p>
+  <!-- WORK -->
+  <section id="work">
+    <div class="connector" style="height:60px; margin-bottom:-10px;">
+      <svg viewBox="0 0 200 60" preserveAspectRatio="xMidYMin meet"><path class="spine-path" d="M100,0 L100,60" stroke="#ef5da8" stroke-width="2.4" fill="none"/></svg>
     </div>
-
-    <div class="tabs" id="tabs" role="tablist" aria-label="Filter terms by category">
-      <button class="tab active" data-cat="all" role="tab" aria-selected="true">All terms</button>
-      <button class="tab" data-cat="Diagnosis" role="tab" aria-selected="false">Diagnoses</button>
-      <button class="tab" data-cat="Tests &amp; Results" role="tab" aria-selected="false">Tests &amp; results</button>
-      <button class="tab" data-cat="Medication" role="tab" aria-selected="false">Medications</button>
-      <button class="tab" data-cat="Procedure" role="tab" aria-selected="false">Procedures</button>
+    <div class="wrap work-grid reveal">
+      <div class="stack" id="stackWrap">
+        <div class="stack-card" data-proj="exosome" style="background-image: url('Home_page_TEST_image2_157_371.jpeg'); transform:translateY(0) rotate(-3deg); z-index:1;"></div>
+        <div class="stack-card" data-proj="colorful" style="background-image: url('Home_page_TEST_Alpha_image1_157_178.png'); transform:translateY(18px) rotate(2deg); z-index:2;"></div>
+        <div class="stack-card" data-proj="cair" style="background-image: url('Home_page_TEST_image3_157_371.png'); transform:translateY(36px) rotate(-1deg); z-index:1;"></div>
+      </div>
+      <div>
+        <div class="proj-list" id="projList">
+          <div class="proj-row" data-proj="exosome">
+            <span class="proj-dot"></span>
+            <div class="proj-card">
+              <div class="pname">Exosome Narrative</div>
+              <div class="pclient">Dermama</div>
+              <div class="pdate">December 2025</div>
+            </div>
+          </div>
+          <div class="proj-row" data-proj="colorful">
+            <span class="proj-dot"></span>
+            <div class="proj-card">
+              <div class="pname">Colorful Works</div>
+              <div class="pclient">Reza Biotech</div>
+              <div class="pdate">August 2026</div>
+            </div>
+          </div>
+          <div class="proj-row" data-proj="cair">
+            <span class="proj-dot"></span>
+            <div class="proj-card">
+              <div class="pname">Center of AI Research</div>
+              <div class="pclient">Atmajaya</div>
+              <div class="pdate">July 2026</div>
+            </div>
+          </div>
+        </div>
+        <div class="viewmore-row"><a href="#" class="btn-outline">View More →</a></div>
+      </div>
     </div>
-
-    <div class="card-grid" id="card-grid"></div>
   </section>
 
-  <!-- REWRITE DEMO -->
-  <section class="rewrite wrap" id="rewrite">
-    <div class="section-head">
-      <h2>Try it on a real note</h2>
-      <p>This is the kind of paragraph you might get after a visit. Click any underlined word to see it in plain English — or reveal the whole thing rewritten at once.</p>
+  <!-- TRANSITION -->
+  <section style="padding:50px 0;">
+    <div class="connector" style="height:60px;">
+      <svg viewBox="0 0 200 60" preserveAspectRatio="xMidYMin meet"><path class="spine-path" d="M100,0 L100,60" stroke="#8f6fe0" stroke-width="2.4" fill="none"/></svg>
     </div>
+    <p class="knot-line reveal">We help build the knot between<br>you and them through our service</p>
+  </section>
 
-    <div class="rewrite-panel">
-      <div class="rewrite-original" id="rewrite-original"><!-- filled by JS --></div>
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="connector" style="height:80px;">
+      <svg viewBox="0 0 200 80" preserveAspectRatio="xMidYMin meet"><path class="spine-path" d="M100,0 C100,25 130,20 125,45 C121,66 100,60 100,80" stroke="#8f6fe0" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+    </div>
+    <div class="wrap services-wrap reveal">
 
-      <button class="reveal-btn" id="reveal-btn">Show the plain-English version</button>
+      <div class="service-list" id="serviceList">
+        <div class="service-pill" data-service="narrative">Narrative Builder</div>
+        <div class="service-pill" data-service="brand">Brand Identity Builder</div>
+        <div class="service-pill" data-service="explainer">Explainer Builder</div>
+        <div class="service-pill" data-service="monthly">Monthly Content Builder</div>
+      </div>
+      <div class="services-more" id="servicesMore"><a href="#" id="moreServicesLink">More about our services →</a></div>
 
-      <div class="rewrite-plain" id="rewrite-plain" hidden>
-        <p>You're having a sudden flare-up of your long-term high blood pressure. Your labs show your kidneys are mildly affected too, even though you're not feeling any symptoms from that yet. We're going to slowly increase your blood pressure medicine — one common type isn't safe for you given how your kidneys are doing right now. If you stick with the plan, we expect a good outcome.</p>
+      <!-- detail panels -->
+      <div class="service-detail" id="detail-narrative">
+        <div class="sd-quotes">
+          <p class="label">If you've ever said:</p>
+          <span class="sd-bubble">"People don't get what we do."</span>
+          <span class="sd-bubble">"Doctors understand it, but patients don't."</span>
+          <span class="sd-bubble">"Our USP statement isn't sharp enough."</span>
+          <p class="sd-blurb">We take the information you already have and turn it into communication people actually understand.</p>
+        </div>
+        <div class="sd-deliver">
+          <h3 class="sd-title">Narrative Builder</h3>
+          <p class="label">What you'll walk away with:</p>
+          <ul>
+            <li>A refined narrative text that tells your story clearly</li>
+            <li>A messaging guide your team can use consistently</li>
+            <li>A competitor differentiation summary that shows exactly where you stand</li>
+            <li>A visual system diagram that simplifies your process</li>
+            <li>A precise, memorable USP statement</li>
+          </ul>
+        </div>
+        <div class="sd-back">Click Anywhere to go back</div>
+      </div>
+
+      <div class="service-detail" id="detail-brand">
+        <div class="sd-quotes">
+          <p class="label">If you've ever said:</p>
+          <span class="sd-bubble">"We look generic, like every other clinic."</span>
+          <span class="sd-bubble">"People don't trust us yet."</span>
+          <span class="sd-bubble">"Our branding isn't consistent."</span>
+          <p class="sd-blurb">We take who you are and shape it into a brand identity that feels clear, credible, and consistent across every touchpoint.</p>
+        </div>
+        <div class="sd-deliver">
+          <h3 class="sd-title">Brand Identity Builder</h3>
+          <p class="label">What you'll walk away with:</p>
+          <ul>
+            <li>Complete brand guidelines for visual and verbal identity</li>
+            <li>Clinic brochures designed for clarity and trust</li>
+            <li>A messaging guide your entire team can follow</li>
+            <li>Social media templates ready for daily use</li>
+          </ul>
+        </div>
+        <div class="sd-back">Click Anywhere to go back</div>
+      </div>
+
+      <div class="service-detail" id="detail-explainer">
+        <div class="sd-quotes">
+          <p class="label">If you've ever said:</p>
+          <span class="sd-bubble">"It takes too long to get people to understand our product."</span>
+          <span class="sd-bubble">"We're preparing a launch campaign."</span>
+          <span class="sd-bubble">"We need strong educational content."</span>
+          <p class="sd-blurb">We take your technical knowledge and translate it into clear, visual stories that work across audiences — patients, doctors, partners, or investors.</p>
+        </div>
+        <div class="sd-deliver">
+          <h3 class="sd-title">Explainer Builder</h3>
+          <p class="label">What you'll walk away with:</p>
+          <ul>
+            <li>30–90 second explainer video(s)</li>
+            <li>Motion graphics &amp; 3D visual assets</li>
+            <li>A social media campaign pack for launch</li>
+            <li>A product launch deck that persuades and informs</li>
+          </ul>
+        </div>
+        <div class="sd-back">Click Anywhere to go back</div>
+      </div>
+
+      <div class="service-detail" id="detail-monthly">
+        <div class="sd-quotes">
+          <p class="label">If you've ever said:</p>
+          <span class="sd-bubble">"We need consistent output every month."</span>
+          <span class="sd-bubble">"We don't have an internal design team."</span>
+          <span class="sd-bubble">"We always need patient education visuals."</span>
+          <p class="sd-blurb">We take the information you already have and turn it into communication people actually understand.</p>
+        </div>
+        <div class="sd-deliver">
+          <h3 class="sd-title">Monthly Content Builder</h3>
+          <p class="label">What you'll walk away with:</p>
+          <ul>
+            <li>A fixed number of visuals and/or videos each month</li>
+            <li>A monthly strategy note to guide direction</li>
+            <li>Brand guideline enforcement across all assets</li>
+          </ul>
+          <p class="sd-note">Note: we don't work with KOLs or influencers, but we do accept video editing based on your supplied materials.</p>
+        </div>
+        <div class="sd-back">Click Anywhere to go back</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FORMULA -->
+  <section id="formula">
+    <div class="connector" style="height:100px;">
+      <svg viewBox="0 0 200 100" preserveAspectRatio="xMidYMin meet"><path class="spine-path" d="M100,0 C100,30 90,40 100,60 C108,76 96,86 100,100" stroke="#5b8af7" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+    </div>
+    <div class="wrap formula-grid reveal">
+      <div>
+        <h2>Our formula to work with<br>healthcare industry</h2>
+        <p class="sub">Clarity saves lives.<br>Confusion costs trust.</p>
+      </div>
+      <div class="equation">Complexity − Noise +<br>Precision = <span class="gtext">Clarity</span></div>
+    </div>
+    <div class="connector" style="height:180px;">
+      <svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMin meet">
+        <path class="spine-path" d="M0,10 C60,120 160,150 220,80 C260,34 200,-4 165,34 C138,64 175,110 230,100 C300,86 340,120 400,150" stroke="#3fe0c5" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- CONTACT / DIAGNOSE -->
+  <section id="contact">
+    <div class="wrap contact-grid reveal">
+      <div>
+        <h2>Not sure which service<br>fits your needs?</h2>
+        <p class="sub">Diagnose your pain points</p>
+      </div>
+      <div class="diagnose-card">
+        <form id="diagnoseForm">
+          <div class="q-row">
+            <label>What best describes where you're stuck?</label>
+            <select id="q1" required>
+              <option value="" disabled selected>Select an answer</option>
+              <option value="narrative">We can't explain what we do simply</option>
+              <option value="brand">Our brand doesn't feel credible yet</option>
+              <option value="explainer">We're launching something and need people to get it fast</option>
+              <option value="monthly">We need a steady stream of content</option>
+            </select>
+          </div>
+          <div class="q-row">
+            <label>What best describes your organization?</label>
+            <select required>
+              <option value="" disabled selected>Select an answer</option>
+              <option>Hospital or clinic</option>
+              <option>Health-tech company</option>
+              <option>Pharmaceutical or biotech</option>
+              <option>Research institution or lab</option>
+            </select>
+          </div>
+          <div class="q-row">
+            <label>How soon do you need this?</label>
+            <select required>
+              <option value="" disabled selected>Select an answer</option>
+              <option>Within a month</option>
+              <option>1–3 months</option>
+              <option>3–6 months</option>
+              <option>Just exploring</option>
+            </select>
+          </div>
+          <div class="q-row">
+            <label>What's your rough budget range?</label>
+            <select required>
+              <option value="" disabled selected>Select an answer</option>
+              <option>Under $2,000</option>
+              <option>$2,000 – $5,000</option>
+              <option>$5,000 – $15,000</option>
+              <option>Let's discuss</option>
+            </select>
+          </div>
+          <div class="q-row q-pair">
+            <div><label>Your name</label><input type="text" required></div>
+            <div><label>Company e-mail</label><input type="email" required></div>
+          </div>
+          <div class="diagnose-submit"><button type="submit">Get your diagnose →</button></div>
+        </form>
+        <div class="diagnose-result" id="diagnoseResult">
+          <p>Based on your answers, we'd recommend:</p>
+          <div class="rec" id="recName">—</div>
+          <a href="#services" class="btn-outline" id="recLink">See this service →</a>
+        </div>
       </div>
     </div>
   </section>
 
 </main>
 
-<footer class="site-footer">
-  <div class="wrap footer-row">
-    <p><strong>Plainspoken</strong> is a demo built to show how a plain-language tool might work. It is not medical advice, and none of the terms here should replace a conversation with your own clinician.</p>
-    <p class="footer-glyph">☞ ask until it makes sense</p>
+<footer>
+  <div class="connector" style="height:60px;">
+    <svg viewBox="0 0 200 60" preserveAspectRatio="xMidYMin meet"><path class="spine-path" d="M100,0 L100,60" stroke="#ef5da8" stroke-width="2.4" fill="none"/></svg>
+  </div>
+  <div class="wrap">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Social Media</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Twitter</a>
+        <a href="#">Behance</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contacts</h4>
+        <p>Bintaro, South Tangerang,<br>Indonesia</p>
+        <a href="mailto:hello@xiyu.studio">hello@xiyu.studio</a>
+      </div>
+      <div class="footer-col">
+        <h4>Information</h4>
+        <a href="#work">Projects</a>
+        <a href="#services">Services</a>
+        <a href="#">About Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>&nbsp;</h4>
+        <a href="mailto:hello@xiyu.studio?subject=30%20minute%20call">Book a 30 minutes call</a>
+      </div>
+    </div>
+    <div class="footer-mark">
+      <img src="Frame_15_image0_695_36.png" alt="Xiyu Mark" style="width:280px; height:auto;">
+    </div>
+    <div class="footer-word">Xiyu.Studio</div>
   </div>
 </footer>
 
-<script>
-/* ---------- data ---------- */
-const TERMS = [
-  { term: "Hypertension", category: "Diagnosis", plain: "Blood pressure that's higher than it should be, on an ongoing basis.", sentence: "“Your hypertension means your blood pressure runs high — we'll work on bringing it down.”" },
-  { term: "Myocardial infarction", category: "Diagnosis", plain: "A heart attack — part of the heart muscle was cut off from blood flow.", sentence: "“What you had was a myocardial infarction — a heart attack.”" },
-  { term: "Benign", category: "Diagnosis", plain: "Not cancerous, and not likely to cause serious harm.", sentence: "“The lump came back benign, so it's not cancer.”" },
-  { term: "Chronic", category: "Diagnosis", plain: "Long-lasting or ongoing, rather than something that resolves quickly.", sentence: "“This is a chronic condition — something we'll manage over time, not cure overnight.”" },
-  { term: "Metastasis", category: "Diagnosis", plain: "Cancer that has spread from where it started to another part of the body.", sentence: "“The scan shows metastasis, meaning the cancer has spread beyond the original site.”" },
-  { term: "Asymptomatic", category: "Tests & Results", plain: "Not currently causing any symptoms you'd notice.", sentence: "“You're asymptomatic right now — you don't feel it, but the condition can still be there.”" },
-  { term: "Prognosis", category: "Tests & Results", plain: "The expected course or outcome of a condition.", sentence: "“Your prognosis is good — we expect a positive outcome.”" },
-  { term: "Idiopathic", category: "Tests & Results", plain: "A cause that isn't known yet, even after testing.", sentence: "“It's idiopathic — we don't yet know what's causing it.”" },
-  { term: "Comorbidity", category: "Tests & Results", plain: "A second condition you have alongside the main one being treated.", sentence: "“Your diabetes is a comorbidity here — another condition alongside the main diagnosis.”" },
-  { term: "Contraindicated", category: "Medication", plain: "Not safe to use, usually because of another condition or medicine.", sentence: "“This medication is contraindicated with what you're already taking — they can't mix safely.”" },
-  { term: "Titrate", category: "Medication", plain: "To slowly raise or lower a dose until it's right for you.", sentence: "“We'll titrate your dose, adjusting it gradually until we find the right amount.”" },
-  { term: "Palliative care", category: "Medication", plain: "Care focused on comfort and quality of life, rather than curing the illness.", sentence: "“We're moving to palliative care, which focuses on keeping you comfortable.”" },
-  { term: "Biopsy", category: "Procedure", plain: "Removing a small tissue sample so it can be tested.", sentence: "“We'll do a biopsy — take a small sample and check it under a microscope.”" },
-  { term: "Catheterization", category: "Procedure", plain: "Threading a thin, flexible tube through a vessel to check or treat the heart.", sentence: "“You'll need a catheterization to get a closer look at your heart's blood vessels.”" },
-  { term: "Intubation", category: "Procedure", plain: "Placing a tube in the airway to help someone breathe.", sentence: "“Intubation just means placing a breathing tube for the procedure.”" }
-];
-
-const byTerm = Object.fromEntries(TERMS.map(t => [t.term.toLowerCase(), t]));
-
-/* ---------- datalist ---------- */
-const datalist = document.getElementById("term-list");
-TERMS.forEach(t => {
-  const opt = document.createElement("option");
-  opt.value = t.term;
-  datalist.appendChild(opt);
-});
-
-/* ---------- translator ---------- */
-const form = document.getElementById("translator-form");
-const input = document.getElementById("term-input");
-const resultBox = document.getElementById("translation-result");
-const hint = document.getElementById("hero-hint");
-
-form.addEventListener("submit", e => {
-  e.preventDefault();
-  const key = input.value.trim().toLowerCase();
-  const match = byTerm[key] || TERMS.find(t => t.term.toLowerCase().includes(key) && key.length > 2);
-
-  if (match) {
-    document.getElementById("result-category").textContent = match.category;
-    document.getElementById("result-term").textContent = match.term;
-    document.getElementById("result-plain").textContent = match.plain;
-    document.getElementById("result-sentence").textContent = match.sentence;
-    resultBox.hidden = false;
-    hint.hidden = true;
-  } else {
-    resultBox.hidden = true;
-    hint.hidden = false;
-    hint.textContent = key
-      ? `No exact match for “${input.value.trim()}” — try one of the fifteen terms in the index below.`
-      : "Type a term above, then press Translate.";
-  }
-});
-
-/* ---------- card grid ---------- */
-const grid = document.getElementById("card-grid");
-
-function renderCards(filter) {
-  grid.innerHTML = "";
-  const list = filter === "all" ? TERMS : TERMS.filter(t => t.category === filter);
-  list.forEach(t => {
-    const card = document.createElement("button");
-    card.className = "index-card";
-    card.type = "button";
-    card.setAttribute("aria-pressed", "false");
-    card.innerHTML = `
-      <span class="punch" aria-hidden="true"></span>
-      <span class="card-inner">
-        <span class="card-face card-front">
-          <span class="card-cat">${t.category}</span>
-          <span class="card-term">${t.term}</span>
-          <span class="card-flip-hint">tap to flip →</span>
-        </span>
-        <span class="card-face card-back">
-          <span class="card-plain">${t.plain}</span>
-        </span>
-      </span>
-    `;
-    card.addEventListener("click", () => {
-      const flipped = card.classList.toggle("flipped");
-      card.setAttribute("aria-pressed", String(flipped));
-    });
-    grid.appendChild(card);
-  });
-}
-renderCards("all");
-
-/* ---------- tabs ---------- */
-document.querySelectorAll(".tab").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".tab").forEach(b => {
-      b.classList.remove("active");
-      b.setAttribute("aria-selected", "false");
-    });
-    btn.classList.add("active");
-    btn.setAttribute("aria-selected", "true");
-    renderCards(btn.dataset.cat);
-  });
-});
-
-/* ---------- rewrite demo: jargon note ---------- */
-const original = document.getElementById("rewrite-original");
-const noteParts = [
-  "Patient presents with acute exacerbation of chronic ",
-  { term: "Hypertension" },
-  ". Labs indicate mild renal ",
-  { term: "Comorbidity" },
-  ", ",
-  { term: "Asymptomatic" },
-  " at present. Recommend ",
-  { term: "Titrate" },
-  "-style adjustment of antihypertensive regimen; ACE inhibitor ",
-  { term: "Contraindicated" },
-  " given renal profile. ",
-  { term: "Prognosis" },
-  " favorable with adherence."
-];
-
-const p = document.createElement("p");
-noteParts.forEach(part => {
-  if (typeof part === "string") {
-    p.appendChild(document.createTextNode(part));
-  } else {
-    const data = byTerm[part.term.toLowerCase()];
-    const span = document.createElement("span");
-    span.className = "jargon";
-    span.textContent = data.term;
-    span.tabIndex = 0;
-    span.setAttribute("role", "button");
-    span.setAttribute("aria-expanded", "false");
-    const tip = document.createElement("span");
-    tip.className = "jargon-tip";
-    tip.textContent = data.plain;
-    span.appendChild(tip);
-    const toggle = () => {
-      const open = span.classList.toggle("open");
-      span.setAttribute("aria-expanded", String(open));
-    };
-    span.addEventListener("click", toggle);
-    span.addEventListener("keydown", e => {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
-    });
-    p.appendChild(span);
-  }
-});
-original.appendChild(p);
-
-/* ---------- reveal full rewrite ---------- */
-const revealBtn = document.getElementById("reveal-btn");
-const plainBlock = document.getElementById("rewrite-plain");
-revealBtn.addEventListener("click", () => {
-  const showing = !plainBlock.hidden;
-  plainBlock.hidden = showing;
-  revealBtn.textContent = showing ? "Show the plain-English version" : "Hide the plain-English version";
-  revealBtn.classList.toggle("is-open", !showing);
-});
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
